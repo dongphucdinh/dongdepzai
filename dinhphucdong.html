@@ -10,7 +10,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-image: url('https://img.freepik.com/free-vector/flat-design-wildflower-heart-background_23-2150494756.jpg?t=st=1730299878~exp=1730303478~hmac=63bd9f5ec3732b74df6d6debd4fc5e0951476e2a972ecce0d569b9e3e914f786&w=1060'); /* Đường dẫn đến ảnh nền */
+            background-image: url('https://img.freepik.com/free-vector/flat-design-wildflower-heart-background_23-2150494756.jpg?t=st=1730299878~exp=1730303478~hmac=63bd9f5ec3732b74df6d6debd4fc5e0951476e2a972ecce0d569b9e3e914f786&w=1060');
             background-size: cover; 
             background-position: center; 
             font-family: Arial, sans-serif;
@@ -32,8 +32,13 @@
             color: #666;
         }
 
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
         .love-button {
-            margin-top: 20px;
             padding: 10px 20px;
             font-size: 16px;
             color: #fff;
@@ -47,6 +52,7 @@
         .love-button:hover {
             background-color: #ff1a1a;
         }
+
         .new-button {
             margin-top: 20px;
             padding: 10px 20px;
@@ -66,24 +72,39 @@
 </head>
 <body>
     <div class="container">
-        <h1>E co bik ko?</h1>
-        <p>A co dieu mun noi</p>
-        <button class="love-button" onclick="showLoveMessage()">An zo day</button>
-        <p id="love-message" style="display:none; color: #ff4d4d; font-weight: bold; margin-top: 20px;">Love u , e co thick anh khong?</p>
+        <h1>E co' thick' ank khong?</h1>
+        <p>Tra? loi` cho ank bik di</p>
+        <div class="button-container">
+            <button class="love-button" onclick="showLoveMessage()">Co</button>
+            <button class="love-button" id="random-button" onclick="moveButton(event)">Khong</button>
+        </div>
+        <p id="love-message" style="display:none; color: #ff4d4d; font-weight: bold; margin-top: 20px;">A bik em thik a ma hjhj</p>
         <div id="new-button-container"></div>
     </div>
 
     <script>
         function showLoveMessage() {
-            document.querySelector(".love-button").style.display = "none"; 
-            document.getElementById("love-message").style.display = "block";
+            document.querySelector(".love-button").style.display = "none";
+            document.getElementById("random-button").style.display = "none"; 
+            document.getElementById("love-message").style.display = "block"; 
             const newButton = document.createElement("button");
-            newButton.innerText = "bam zo day de tra loi a"; 
+            newButton.innerText = "Bấm zo đây để mình tâm sự "; 
             newButton.className = "new-button"; 
             newButton.onclick = function() {
                 window.location.href = "https://www.messenger.com/t/100038180257555/";
             }
             document.getElementById("new-button-container").appendChild(newButton);
+        }
+
+        function moveButton(event) {
+            event.preventDefault();
+            const button = event.target;
+            const randomTop = Math.random() * (window.innerHeight - button.offsetHeight);
+            const randomLeft = Math.random() * (window.innerWidth - button.offsetWidth);
+
+            button.style.position = "absolute";
+            button.style.top = randomTop + "px";
+            button.style.left = randomLeft + "px";
         }
     </script>
 </body>
